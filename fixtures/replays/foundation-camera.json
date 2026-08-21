@@ -1,0 +1,32 @@
+{
+  "replayId": "foundation-camera-v1",
+  "totalTicks": 120,
+  "inputs": [
+    { "tick": 0, "type": "camera.dolly", "logarithmicDelta": -0.1 },
+    {
+      "tick": 1,
+      "type": "camera.orbit",
+      "deltaYawRad": 0.2,
+      "deltaPitchRad": -0.05
+    },
+    { "tick": 2, "type": "camera.roll", "deltaRad": 0.1 },
+    { "tick": 30, "type": "trace.begin", "traceId": "foundation-trace" },
+    {
+      "tick": 31,
+      "type": "trace.sample",
+      "xNormalized": 0.25,
+      "yNormalized": 0.75
+    },
+    { "tick": 32, "type": "trace.end" },
+    { "tick": 60, "type": "camera.recenter" },
+    { "tick": 61, "type": "camera.freeze", "frozen": true },
+    {
+      "tick": 62,
+      "type": "camera.orbit",
+      "deltaYawRad": 0.5,
+      "deltaPitchRad": 0
+    },
+    { "tick": 63, "type": "camera.freeze", "frozen": false },
+    { "tick": 64, "type": "itinerary.resume" }
+  ]
+}

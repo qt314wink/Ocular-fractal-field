@@ -41,6 +41,15 @@ importers:
 
   packages/deterministic-math: {}
 
+  packages/replay:
+    dependencies:
+      '@off/contracts':
+        specifier: workspace:*
+        version: link:../contracts
+      '@off/simulation-core':
+        specifier: workspace:*
+        version: link:../simulation-core
+
   packages/simulation-core:
     dependencies:
       '@off/contracts':
