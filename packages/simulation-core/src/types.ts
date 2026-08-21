@@ -93,6 +93,11 @@ export type SemanticEvent =
       readonly field: 'camera.radiusUnits' | 'camera.pitchRad';
       readonly attempted: number;
       readonly applied: number;
+    }
+  | {
+      readonly tick: number;
+      readonly type: 'kernel.delta.rejected';
+      readonly reason: 'NEGATIVE_DELTA' | 'NON_FINITE_DELTA';
     };
 
 export interface StepResult {
