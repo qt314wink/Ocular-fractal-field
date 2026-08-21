@@ -41,6 +41,15 @@ importers:
 
   packages/deterministic-math: {}
 
+  packages/simulation-core:
+    dependencies:
+      '@off/contracts':
+        specifier: workspace:*
+        version: link:../contracts
+      '@off/deterministic-math':
+        specifier: workspace:*
+        version: link:../deterministic-math
+
   tools/generate-types:
     dependencies:
       json-schema-to-typescript:
