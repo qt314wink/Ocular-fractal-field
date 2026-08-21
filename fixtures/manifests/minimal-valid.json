@@ -1,0 +1,92 @@
+{
+  "manifestId": "ocular-foundation-minimal",
+  "semanticVersion": "1.0.0",
+  "replayCompatibilityVersion": 1,
+  "engine": {
+    "engineVersion": "0.1.0",
+    "simulationHz": 60,
+    "maxAccumulatorSec": 0.25
+  },
+  "featureFallbacks": {
+    "reducedMotion": "STABLE_VIEW",
+    "audioUnavailable": "MUTED",
+    "gyroUnavailable": "MANUAL_ONLY"
+  },
+  "qualityTiers": [
+    {
+      "tierId": "LOW",
+      "particleCount": 25000,
+      "maxGpuMemoryBudgetBytes": 67108864
+    },
+    {
+      "tierId": "MEDIUM",
+      "particleCount": 75000,
+      "maxGpuMemoryBudgetBytes": 134217728
+    },
+    {
+      "tierId": "HIGH",
+      "particleCount": 150000,
+      "maxGpuMemoryBudgetBytes": 268435456
+    }
+  ],
+  "itinerary": {
+    "segments": [
+      {
+        "segmentId": "overview",
+        "startTick": 0,
+        "endTick": 120,
+        "durationMs": 2000,
+        "pose": {
+          "radiusUnits": 130,
+          "pitchRad": 0.5,
+          "yawRad": 0,
+          "rollRad": 0,
+          "fovDeg": 55,
+          "gazeMode": "CENTER"
+        },
+        "easing": { "x1": 0.42, "y1": 0, "x2": 0.58, "y2": 1 }
+      },
+      {
+        "segmentId": "descent",
+        "startTick": 120,
+        "endTick": 240,
+        "durationMs": 2000,
+        "pose": {
+          "radiusUnits": 65,
+          "pitchRad": 0.35,
+          "yawRad": 0.4,
+          "rollRad": 0,
+          "fovDeg": 60,
+          "gazeMode": "CENTER"
+        },
+        "easing": { "x1": 0.42, "y1": 0, "x2": 0.58, "y2": 1 }
+      }
+    ]
+  },
+  "audio": {
+    "sampleRateHz": 48000,
+    "masterGainNormalized": 0.15
+  },
+  "gameRules": {
+    "traceMatchToleranceRad": 0.2,
+    "cameraRadiusMinUnits": 1,
+    "cameraRadiusMaxUnits": 130,
+    "initialTurbulenceNormalized": 0.25,
+    "turbulenceDecayPerSec": 0.5
+  },
+  "accessibility": {
+    "reducedMotionDefault": false,
+    "colorIndependentCues": true
+  },
+  "elements": [
+    { "elementId": "bismuth", "displayName": "Bismuth" },
+    { "elementId": "caustic", "displayName": "Caustic" }
+  ],
+  "reactions": [
+    {
+      "reactionId": "prismatic-hopper-bloom",
+      "participantElementIds": ["bismuth", "caustic"],
+      "effectId": "mirrored-echo-target"
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ocular-fractal-field.invalid/schemas/manifest.schema.json",
+  "title": "OcularFractalFieldManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifestId",
+    "semanticVersion",
+    "replayCompatibilityVersion",
+    "engine",
+    "featureFallbacks",
+    "qualityTiers",
+    "itinerary",
+    "audio",
+    "gameRules",
+    "accessibility",
+    "elements",
+    "reactions"
+  ],
+  "properties": {
+    "manifestId": { "type": "string", "pattern": "^[a-z][a-z0-9-]{2,63}$" },
+    "semanticVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "replayCompatibilityVersion": { "type": "integer", "minimum": 1 },
+    "engine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["engineVersion", "simulationHz", "maxAccumulatorSec"],
+      "properties": {
+        "engineVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "simulationHz": { "type": "integer", "minimum": 1, "maximum": 240 },
+        "maxAccumulatorSec": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 }
+      }
+    },
+    "featureFallbacks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reducedMotion", "audioUnavailable", "gyroUnavailable"],
+      "properties": {
+        "reducedMotion": { "const": "STABLE_VIEW" },
+        "audioUnavailable": { "const": "MUTED" },
+        "gyroUnavailable": { "const": "MANUAL_ONLY" }
+      }
+    },
+    "qualityTiers": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/qualityTier" }
+    },
+    "itinerary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["segments"],
+      "properties": {
+        "segments": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/itineraryKeyframe" }
+        }
+      }
+    },
+    "audio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sampleRateHz", "masterGainNormalized"],
+      "properties": {
+        "sampleRateHz": { "type": "integer", "minimum": 8000, "maximum": 192000 },
+        "masterGainNormalized": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "gameRules": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "traceMatchToleranceRad",
+        "cameraRadiusMinUnits",
+        "cameraRadiusMaxUnits",
+        "initialTurbulenceNormalized",
+        "turbulenceDecayPerSec"
+      ],
+      "properties": {
+        "traceMatchToleranceRad": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 3.141592653589793
+        },
+        "cameraRadiusMinUnits": { "type": "number", "exclusiveMinimum": 0 },
+        "cameraRadiusMaxUnits": { "type": "number", "exclusiveMinimum": 0 },
+        "initialTurbulenceNormalized": { "type": "number", "minimum": 0, "maximum": 1 },
+        "turbulenceDecayPerSec": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "accessibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reducedMotionDefault", "colorIndependentCues"],
+      "properties": {
+        "reducedMotionDefault": { "type": "boolean" },
+        "colorIndependentCues": { "type": "boolean" }
+      }
+    },
+    "elements": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/element" }
+    },
+    "reactions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/reaction" }
+    }
+  },
+  "$defs": {
+    "cameraPose": {
+      "title": "CameraPose",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["radiusUnits", "pitchRad", "yawRad", "rollRad", "fovDeg", "gazeMode"],
+      "properties": {
+        "radiusUnits": { "type": "number", "exclusiveMinimum": 0 },
+        "pitchRad": {
+          "type": "number",
+          "minimum": -1.5533430342749532,
+          "maximum": 1.5533430342749532
+        },
+        "yawRad": { "type": "number", "minimum": -6.283185307179586, "maximum": 6.283185307179586 },
+        "rollRad": {
+          "type": "number",
+          "minimum": -3.141592653589793,
+          "maximum": 3.141592653589793
+        },
+        "fovDeg": { "type": "number", "minimum": 35, "maximum": 85 },
+        "gazeMode": { "enum": ["CENTER", "OUTWARD", "TARGET", "TANGENT"] }
+      }
+    },
+    "cubicBezierEasing": {
+      "title": "CubicBezierEasing",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x1", "y1", "x2", "y2"],
+      "properties": {
+        "x1": { "type": "number", "minimum": 0, "maximum": 1 },
+        "y1": { "type": "number", "minimum": 0, "maximum": 1 },
+        "x2": { "type": "number", "minimum": 0, "maximum": 1 },
+        "y2": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "qualityTier": {
+      "title": "QualityTier",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tierId", "particleCount", "maxGpuMemoryBudgetBytes"],
+      "properties": {
+        "tierId": { "enum": ["LOW", "MEDIUM", "HIGH"] },
+        "particleCount": { "type": "integer", "minimum": 1 },
+        "maxGpuMemoryBudgetBytes": { "type": "integer", "minimum": 1048576 }
+      }
+    },
+    "itineraryKeyframe": {
+      "title": "ItineraryKeyframe",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["segmentId", "startTick", "endTick", "durationMs", "pose", "easing"],
+      "properties": {
+        "segmentId": { "type": "string", "pattern": "^[a-z][a-z0-9-]{1,63}$" },
+        "startTick": { "type": "integer", "minimum": 0 },
+        "endTick": { "type": "integer", "minimum": 1 },
+        "durationMs": { "type": "integer", "minimum": 1 },
+        "pose": { "$ref": "#/$defs/cameraPose" },
+        "easing": { "$ref": "#/$defs/cubicBezierEasing" }
+      }
+    },
+    "element": {
+      "title": "ElementDefinition",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["elementId", "displayName"],
+      "properties": {
+        "elementId": { "type": "string", "pattern": "^[a-z][a-z0-9-]{1,63}$" },
+        "displayName": { "type": "string", "minLength": 1, "maxLength": 64 }
+      }
+    },
+    "reaction": {
+      "title": "ReactionDefinition",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reactionId", "participantElementIds", "effectId"],
+      "properties": {
+        "reactionId": { "type": "string", "pattern": "^[a-z][a-z0-9-]{1,63}$" },
+        "participantElementIds": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[a-z][a-z0-9-]{1,63}$" }
+        },
+        "effectId": { "type": "string", "pattern": "^[a-z][a-z0-9-]{1,63}$" }
+      }
+    }
+  }
+}
