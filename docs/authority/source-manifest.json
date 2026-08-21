@@ -1,0 +1,32 @@
+{
+  "repository": "qt314wink/Ocular-fractal-field",
+  "recordedAt": "2026-08-21",
+  "sourceEvidenceVerification": "VERIFIED_USER_APPROVED_RECONSTRUCTION",
+  "sources": [
+    {
+      "file": "2026-08-14-ocular-fractal-field-design.md",
+      "repositoryPath": "docs/authority/2026-08-14-ocular-fractal-field-design.md",
+      "bytes": 32284,
+      "sha256": "48f2ebc1d074a3e5ce2a886f2644af0a1d15837a36ef53cfb81d6e5c5e1785d6",
+      "status": "verified_raw_bytes"
+    },
+    {
+      "file": "2026-08-14-ocular-fractal-field-foundation.md",
+      "repositoryPath": "docs/authority/2026-08-14-ocular-fractal-field-foundation.md",
+      "bytes": 24931,
+      "sha256": "43e4f4d61ed831de5ffa90bfc924fa618798e9ec3dba1bbb2117304e14292bf8",
+      "status": "verified_raw_bytes"
+    },
+    {
+      "file": "Particle Sim Game_260813_205450.pdf",
+      "providedFile": "Particle Sim Game_260813_205450 (Pages 1-58).pdf",
+      "repositoryPath": null,
+      "bytes": 11869851,
+      "sha256": "1b85d574448714e897a4c5912ea383835291f9e992d9268bfb2ea36f4d2ecea1",
+      "supersededExpectedSha256": "030f2dcd17465e235d50d546c9798dc8702817acff40a9e447ff796364fa8fe3",
+      "pages": 58,
+      "provenance": "User states the source contents were pasted into a new PDF document from a phone and explicitly approved the reconstructed file as source evidence on 2026-08-21.",
+      "status": "verified_raw_bytes_user_approved_reconstruction"
+    }
+  ]
+}
