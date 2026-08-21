@@ -1,2 +1,3 @@
 docs/authority/**
 pnpm-lock.yaml
+fixtures/state-hashes/**

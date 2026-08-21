@@ -68,6 +68,18 @@ importers:
         specifier: ^3.0.0
         version: 3.9.6
 
+  tools/verify-determinism:
+    dependencies:
+      '@off/contracts':
+        specifier: workspace:*
+        version: link:../../packages/contracts
+      '@off/replay':
+        specifier: workspace:*
+        version: link:../../packages/replay
+      vite-node:
+        specifier: 3.2.4
+        version: 3.2.4(@types/node@22.20.1)
+
 packages:
 
   '@apidevtools/json-schema-ref-parser@11.9.3':

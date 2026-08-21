@@ -6,12 +6,13 @@
     "node": ">=22.13.0 <23"
   },
   "scripts": {
-    "generate": "pnpm --filter @off/contracts generate",
+    "generate": "pnpm --filter @off/contracts generate && git diff --exit-code -- packages/contracts/src/generated/manifest.ts",
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "typecheck": "pnpm -r typecheck",
     "test": "vitest run",
-    "validate": "pnpm generate && pnpm format:check && pnpm lint && pnpm typecheck && pnpm test"
+    "verify:determinism": "pnpm --filter @off/verify-determinism start",
+    "validate": "pnpm generate && pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm verify:determinism"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",

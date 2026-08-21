@@ -1,0 +1,16 @@
+{
+  "name": "@off/verify-determinism",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "vite-node --script src/verify.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@off/contracts": "workspace:*",
+    "@off/replay": "workspace:*",
+    "vite-node": "3.2.4"
+  }
+}
