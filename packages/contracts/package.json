@@ -5,6 +5,7 @@
   "type": "module",
   "exports": "./src/index.ts",
   "scripts": {
+    "generate": "pnpm --filter @off/generate-types start",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "vitest run"
   },
